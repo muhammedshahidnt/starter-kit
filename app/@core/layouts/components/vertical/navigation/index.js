@@ -10,7 +10,7 @@ import { createTheme, responsiveFontSizes, styled, ThemeProvider } from '@mui/ma
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // ** Theme Config
-import themeConfig from 'src/configs/themeConfig'
+import themeConfig from '@/app/configs/themeConfig'
 
 // ** Component Imports
 import Drawer from './Drawer'
@@ -18,10 +18,10 @@ import VerticalNavItems from './VerticalNavItems'
 import VerticalNavHeader from './VerticalNavHeader'
 
 // ** Theme Options
-import themeOptions from 'src/@core/theme/ThemeOptions'
+import themeOptions from '@/app/@core/theme/ThemeOptions'
 
 // ** Util Import
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+import { hexToRGBA } from '@/app/@core/utils/hex-to-rgba'
 
 const StyledBoxForShadow = styled(Box)(({ theme }) => ({
   top: 60,

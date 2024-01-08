@@ -28,7 +28,7 @@ import Icon from '@/app/@core/components/icon'
 import themeConfig from '@/app/configs/themeConfig'
 
 // ** Layout Import
-import BlankLayout from '@/app/layouts/BlankLayout'
+import BlankLayout from '@/app/@core/layouts/BlankLayout'
 
 // ** Hooks
 import { useSettings } from '../@core/hooks/useSettings'

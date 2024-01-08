@@ -8,10 +8,10 @@ import { styled, useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 
 // ** Custom Icon Import
-import Icon from 'src/@core/components/icon'
+import Icon from '@/app/@core/components/icon'
 
 // ** Configs
-import themeConfig from 'src/configs/themeConfig'
+import themeConfig from '@/app/configs/themeConfig'
 
 // ** Styled Components
 const MenuHeaderWrapper = styled(Box)(({ theme }) => ({

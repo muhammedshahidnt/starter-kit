@@ -41,7 +41,7 @@ import UseBgColor from '../@core/hooks/useBgColor'
 import themeConfig from '@/app/configs/themeConfig'
 
 // ** Layout Import
-import BlankLayout from '@/app/layouts/BlankLayout'
+import BlankLayout from '@/app/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 
@@ -337,14 +337,14 @@ const Loginpage = () => {
                                     Forgot Password?
                                 </Typography>
                             </Box>
-                            {/* <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 7 }}>
+                            <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 7 }}>
                                 Login
-                            </Button> */}
-                            <Link href="/home">
+                            </Button>
+                            {/* <Link href="/home">
                                 <Button variant="contained" color="primary">
                                    Login
                                 </Button>
-                                </Link>
+                                </Link> */}
                                 <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
                                     <Typography sx={{ mr: 2, color: 'text.secondary' }}>New on our platform?</Typography>
                                     <Typography href='/register' component={Link} sx={{ color: 'primary.main', textDecoration: 'none' }}>

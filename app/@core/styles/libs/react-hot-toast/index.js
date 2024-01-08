@@ -4,7 +4,7 @@ import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
 // ** Hook Import
-import { useSettings } from 'src/@core/hooks/useSettings'
+import { useSettings } from '@/app/@core/hooks/useSettings'
 
 const ReactHotToast = styled(Box)(({ theme }) => {
   // ** Hook & Var

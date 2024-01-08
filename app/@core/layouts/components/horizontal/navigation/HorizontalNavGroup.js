@@ -21,20 +21,20 @@ import clsx from 'clsx'
 import { usePopper } from 'react-popper'
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon'
+import Icon from '@/app/@core/components/icon'
 
 // ** Theme Config Import
-import themeConfig from 'src/configs/themeConfig'
+import themeConfig from '@/app/configs/themeConfig'
 
 // ** Custom Components Imports
 import HorizontalNavItems from './HorizontalNavItems'
-import UserIcon from 'src/layouts/components/UserIcon'
-import Translations from 'src/layouts/components/Translations'
-import CanViewNavGroup from 'src/layouts/components/acl/CanViewNavGroup'
+import UserIcon from '@/app/layouts/components/UserIcon'
+import Translations from '@/app/layouts/components/Translations'
+import CanViewNavGroup from '@/app/layouts/components/acl/CanViewNavGroup'
 
 // ** Utils
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
-import { hasActiveChild } from 'src/@core/layouts/utils'
+import { hexToRGBA } from '@/app/@core/utils/hex-to-rgba'
+import { hasActiveChild } from '@/app/@core/layouts/utils'
 
 // ** Styled Components
 const ListItem = styled(MuiListItem)(({ theme }) => ({

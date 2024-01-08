@@ -18,16 +18,14 @@ import MuiListItem from '@mui/material/ListItem'
 import clsx from 'clsx'
 
 // ** Theme Config Import
-import themeConfig from 'src/configs/themeConfig'
-
+import themeConfig from '@/app/configs/themeConfig'
 // ** Custom Components Imports
-import UserIcon from 'src/layouts/components/UserIcon'
-import Translations from 'src/layouts/components/Translations'
-import CanViewNavLink from 'src/layouts/components/acl/CanViewNavLink'
-
+import UserIcon from '@/app/layouts/components/UserIcon'
+import Translations from '@/app/layouts/components/Translations'
+import CanViewNavLink from '@/app/layouts/components/acl/CanViewNavLink'
 // ** Util Imports
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
-import { handleURLQueries } from 'src/@core/layouts/utils'
+import { hexToRGBA } from '@/app/@core/utils/hex-to-rgba'
+import { handleURLQueries } from '@/app/@core/layouts/utils'
 
 const ListItem = styled(MuiListItem)(({ theme }) => ({
   width: 'auto',

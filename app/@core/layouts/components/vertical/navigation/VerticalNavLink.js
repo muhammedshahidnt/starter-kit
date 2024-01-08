@@ -12,15 +12,15 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemButton from '@mui/material/ListItemButton'
 
 // ** Configs Import
-import themeConfig from 'src/configs/themeConfig'
+import themeConfig from '@/app/configs/themeConfig'
 
 // ** Custom Components Imports
-import UserIcon from 'src/layouts/components/UserIcon'
-import Translations from 'src/layouts/components/Translations'
-import CanViewNavLink from 'src/layouts/components/acl/CanViewNavLink'
+import UserIcon from '@/app/layouts/components/UserIcon'
+import Translations from '@/app/layouts/components/Translations'
+import CanViewNavLink from '@/app/layouts/components/acl/CanViewNavLink'
 
 // ** Util Import
-import { handleURLQueries } from 'src/@core/layouts/utils'
+import { handleURLQueries } from '@/app/@core/layouts/utils'
 
 // ** Styled Components
 const MenuNavLink = styled(ListItemButton)(({ theme }) => ({

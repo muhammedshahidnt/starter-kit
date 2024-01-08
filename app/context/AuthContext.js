@@ -2,7 +2,7 @@
 import { createContext, useEffect, useState } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 // ** Axios
 import axios from 'axios'
@@ -28,17 +28,20 @@ const AuthProvider = ({ children }) => {
 
   // ** Hooks
   const router = useRouter()
+  // console.log('====================================');
+  // console.log(router);
+  // console.log('====================================');
   useEffect(() => {
     const initAuth = async () => {
       const storedToken = window.localStorage.getItem(authConfig.storageTokenKeyName)
       if (storedToken) {
         setLoading(true)
         await axios
-          .get(authConfig.meEndpoint, {
-            headers: {
-              Authorization: storedToken
-            }
-          })
+        .get(authConfig.meEndpoint, {
+          headers: {
+            Authorization: storedToken
+          }
+        })
           .then(async response => {
             setLoading(false)
             setUser({ ...response.data.userData })
@@ -53,15 +56,16 @@ const AuthProvider = ({ children }) => {
               router.replace('/login')
             }
           })
-      } else {
-        setLoading(false)
+        } else {
+          setLoading(false)
       }
     }
     initAuth()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
+  
   const handleLogin = (params, errorCallback) => {
+
     // console.log('====================================');
     // console.log(params);
     // console.log('====================================');

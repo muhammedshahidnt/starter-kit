@@ -4,10 +4,10 @@ import GlobalStyles from '@mui/material/GlobalStyles'
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles'
 
 // ** Theme Config
-import themeConfig from 'src/configs/themeConfig'
+import themeConfig from '@/app/configs/themeConfig'
 
 // ** Direction component for LTR or RTL
-import Direction from 'src/layouts/components/Direction'
+import Direction from '@/app/layouts/components/Direction'
 
 // ** Theme
 import themeOptions from './ThemeOptions'

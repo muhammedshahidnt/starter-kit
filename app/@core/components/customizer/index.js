@@ -17,10 +17,10 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import MuiDrawer from '@mui/material/Drawer'
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon'
+import Icon from '@/app/@core/components/icon'
 
 // ** Hook Import
-import { useSettings } from 'src/@core/hooks/useSettings'
+import { useSettings } from '@/app/@core/hooks/useSettings'
 
 const Toggler = styled(Box)(({ theme }) => ({
   right: 0,

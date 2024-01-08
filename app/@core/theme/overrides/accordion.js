@@ -1,5 +1,5 @@
 // ** Hook Import
-import { useSettings } from 'src/@core/hooks/useSettings'
+import { useSettings } from '@/app/@core/hooks/useSettings'
 
 const Accordion = () => {
   // Hook & Var

@@ -1,5 +1,5 @@
 // ** Util Import
-import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+import { hexToRGBA } from '@/app/@core/utils/hex-to-rgba'
 
 const Pagination = () => {
   return {

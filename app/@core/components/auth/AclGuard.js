@@ -5,21 +5,21 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 // ** Context Imports
-import { AbilityContext } from 'src/layouts/components/acl/Can'
+import { AbilityContext } from '@/app/layouts/components/acl/Can'
 
 // ** Config Import
-import { buildAbilityFor } from 'src/configs/acl'
+import { buildAbilityFor } from '@/app/configs/acl'
 
 // ** Component Import
-import NotAuthorized from 'src/pages/401'
-import Spinner from 'src/@core/components/spinner'
-import BlankLayout from 'src/@core/layouts/BlankLayout'
+// import NotAuthorized from 'src/pages/401'
+import Spinner from '@/app/@core/components/spinner'
+import BlankLayout from '@/app/@core/layouts/BlankLayout'
 
 // ** Hooks
-import { useAuth } from 'src/hooks/useAuth'
+import { useAuth } from '@/app/hooks/useAuth'
 
 // ** Util Import
-import getHomeRoute from 'src/layouts/components/acl/getHomeRoute'
+import getHomeRoute from '@/app/layouts/components/acl/getHomeRoute'
 
 const AclGuard = props => {
   // ** Props

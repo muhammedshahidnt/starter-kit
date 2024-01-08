@@ -18,19 +18,18 @@ import ListItemButton from '@mui/material/ListItemButton'
 import clsx from 'clsx'
 
 // ** Icon Imports
-import Icon from 'src/@core/components/icon'
+import Icon from '@/app/@core/components/icon'
 
 // ** Configs Import
-import themeConfig from 'src/configs/themeConfig'
-
+import themeConfig from '@/app/configs/themeConfig'
 // ** Utils
-import { hasActiveChild, removeChildren } from 'src/@core/layouts/utils'
+import { hasActiveChild, removeChildren } from '@/app/@core/layouts/utils'
 
 // ** Custom Components Imports
 import VerticalNavItems from './VerticalNavItems'
-import UserIcon from 'src/layouts/components/UserIcon'
-import Translations from 'src/layouts/components/Translations'
-import CanViewNavGroup from 'src/layouts/components/acl/CanViewNavGroup'
+import UserIcon from '@/app/layouts/components/UserIcon'
+import Translations from '@/app/layouts/components/Translations'
+import CanViewNavGroup from '@/app/layouts/components/acl/CanViewNavGroup'
 
 const MenuItemTextWrapper = styled(Box)(({ theme }) => ({
   width: '100%',
