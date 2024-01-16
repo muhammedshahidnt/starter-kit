@@ -22,26 +22,26 @@ const defaultProvider = {
 const AuthContext = createContext(defaultProvider)
 
 const AuthProvider = ({ children }) => {
+  // console.log('====================================');
+  // console.log(children);
+  // console.log('=======ssssssssssss=============================');
   // ** States
   const [user, setUser] = useState(defaultProvider.user)
   const [loading, setLoading] = useState(defaultProvider.loading)
 
   // ** Hooks
   const router = useRouter()
-  // console.log('====================================');
-  // console.log(router);
-  // console.log('====================================');
   useEffect(() => {
     const initAuth = async () => {
       const storedToken = window.localStorage.getItem(authConfig.storageTokenKeyName)
       if (storedToken) {
         setLoading(true)
         await axios
-        .get(authConfig.meEndpoint, {
-          headers: {
-            Authorization: storedToken
-          }
-        })
+          .get(authConfig.meEndpoint, {
+            headers: {
+              Authorization: storedToken
+            }
+          })
           .then(async response => {
             setLoading(false)
             setUser({ ...response.data.userData })
@@ -56,19 +56,15 @@ const AuthProvider = ({ children }) => {
               router.replace('/login')
             }
           })
-        } else {
-          setLoading(false)
+      } else {
+        setLoading(false)
       }
     }
     initAuth()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  
-  const handleLogin = (params, errorCallback) => {
 
-    // console.log('====================================');
-    // console.log(params);
-    // console.log('====================================');
+  const handleLogin = (params, errorCallback) => {
     axios
       .post(authConfig.loginEndpoint, params)
       .then(async response => {

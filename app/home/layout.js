@@ -29,7 +29,7 @@ import { defaultACLObj } from '@/app/configs/acl'
 import themeConfig from '@/app/configs/themeConfig'
 
 // ** Fake-DB Import
-// import '@/app/@fake-db'A
+import '@/@fake-db'
 
 // ** Third Party Import
 import { Toaster } from 'react-hot-toast'
@@ -67,22 +67,36 @@ import '@/app/iconify-bundle/icons-bundle-react'
 // ** Global css styles
 // import '../../styles/globals.css'
 
+
+import { Children } from 'react'
+
+// ** Next Import
+import Document, { Html, Main, NextScript } from 'next/document'
+
+// ** Emotion Imports
+import createEmotionServer from '@emotion/server/create-instance'
+
+// ** Utils Imports
+
 const clientSideEmotionCache = createEmotionCache()
 
 // ** Pace Loader
 if (themeConfig.routingLoader) {
-  Router.events.on('routeChangeStart', () => {
+  Router?.events.on('routeChangeStart', () => {
     NProgress.start()
   })
-  Router.events.on('routeChangeError', () => {
+  Router?.events.on('routeChangeError', () => {
     NProgress.done()
   })
-  Router.events.on('routeChangeComplete', () => {
+  Router?.events.on('routeChangeComplete', () => {
     NProgress.done()
   })
 }
 
 const Guard = ({ children, authGuard, guestGuard }) => {
+  // console.log('====================================');
+  // console.log(authGuard);
+  // console.log('====================================');
   if (guestGuard) {
     return <GuestGuard fallback={<Spinner />}>{children}</GuestGuard>
   } else if (!guestGuard && !authGuard) {
@@ -92,9 +106,71 @@ const Guard = ({ children, authGuard, guestGuard }) => {
   }
 }
 
+
+export class CustomDocument extends Document {
+  render() {
+    return (
+      <Html lang='en'>
+        <Head>
+          <link rel='preconnect' href='https://fonts.googleapis.com' />
+          <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+          />
+          <link rel='apple-touch-icon' sizes='180x180' href='/images/apple-touch-icon.png' />
+          <link rel='shortcut icon' href='/images/favicon.png' />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    )
+  }
+}
+CustomDocument.getInitialProps = async ctx => {
+  const originalRenderPage = ctx.renderPage
+  const cache = createEmotionCache()
+  const { extractCriticalToChunks } = createEmotionServer(cache)
+  ctx.renderPage = () =>
+    originalRenderPage({
+      enhanceApp: App => props =>
+        (
+          <App
+            {...props} // @ts-ignore
+            emotionCache={cache}
+          />
+        ) 
+    })
+  const initialProps = await Document.getInitialProps(ctx)
+  const emotionStyles = extractCriticalToChunks(initialProps.html)
+
+  const emotionStyleTags = emotionStyles.styles.map(style => {
+    return (
+      <style
+        key={style.key}
+        dangerouslySetInnerHTML={{ __html: style.css }}
+        data-emotion={`${style.key} ${style.ids.join(' ')}`}
+      />
+    )
+  })
+
+  return {
+    ...initialProps,
+    
+    styles: [...Children.toArray(initialProps.styles), ...emotionStyleTags]
+  }
+}
+
+
+
 // ** Configure JSS & ClassName
-const App = props => {
+const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
+  // console.log('====================================');
+  // console.log( emotionCache);
+  // console.log('====================================');
 
   // Variables
   const contentHeightFixed = Component?.contentHeightFixed ?? false
@@ -128,6 +204,7 @@ const aclAbilities = Component && Component.acl ? Component.acl : defaultACLObj;
                     <Guard authGuard={authGuard} guestGuard={guestGuard}>
                       <AclGuard aclAbilities={aclAbilities} guestGuard={guestGuard} authGuard={authGuard}>
                         {getLayout(<Component {...pageProps} />)}
+
                       </AclGuard>
                     </Guard>
                     <ReactHotToast>

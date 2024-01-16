@@ -9,6 +9,9 @@ import { useAuth } from '@/app/hooks/useAuth'
 
 const GuestGuard = props => {
   const { children, fallback } = props
+  // console.log('====================================');
+  // console.log(children);
+  // console.log('=========0000000000000000===========================');
   const auth = useAuth()
   const router = useRouter()
   useEffect(() => {

@@ -24,6 +24,9 @@ import getHomeRoute from '@/app/layouts/components/acl/getHomeRoute'
 const AclGuard = props => {
   // ** Props
   const { aclAbilities, children, guestGuard = false, authGuard = true } = props
+  // console.log('====================================');
+  // console.log(props);
+  // console.log('====================================');
 
   // ** Hooks
   const auth = useAuth()

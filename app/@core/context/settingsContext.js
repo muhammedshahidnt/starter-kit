@@ -1,4 +1,5 @@
 // ** React Imports
+'use client'
 import { createContext, useState, useEffect } from 'react'
 
 // ** ThemeConfig Import
@@ -31,6 +32,9 @@ const staticSettings = {
 
 const restoreSettings = () => {
   let settings = null
+  // console.log('====================================');
+  // console.log(settings);
+  // console.log('=================sssssssssssssssssssss===================');
   try {
     const storedData = window.localStorage.getItem('settings')
     if (storedData) {
@@ -66,10 +70,14 @@ export const SettingsContext = createContext({
 export const SettingsProvider = ({ children, pageSettings }) => {
   // ** State
   const [settings, setSettings] = useState({ ...initialSettings })
+  // console.log('====================================');
+  // console.log(settings);
+  // console.log('====================================');
   useEffect(() => {
     const restoredSettings = restoreSettings()
     if (restoredSettings) {
       setSettings({ ...restoredSettings })
+      
     }
     if (pageSettings) {
       setSettings({ ...settings, ...pageSettings })
@@ -94,4 +102,7 @@ export const SettingsProvider = ({ children, pageSettings }) => {
   return <SettingsContext.Provider value={{ settings, saveSettings }}>{children}</SettingsContext.Provider>
 }
 
-export const SettingsConsumer = SettingsContext.Consumer
+export const SettingsConsumer = () =>{
+
+  SettingsContext.Consumer
+}

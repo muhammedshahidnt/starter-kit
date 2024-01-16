@@ -2,13 +2,16 @@
 import { useEffect } from 'react'
 
 // ** Next Import
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 // ** Hooks Import
 import { useAuth } from '@/app/hooks/useAuth'
 
 const AuthGuard = props => {
   const { children, fallback } = props
+  // console.log('====================================');
+  // console.log(fallback);
+  // console.log('====================================');
   const auth = useAuth()
   const router = useRouter()
   useEffect(

@@ -1,10 +1,11 @@
-"use client"
-import React from 'react'
-import { useSettings } from '../@core/hooks/useSettings'
-import FooterIllustrationsV2 from '../views/pages/auth/FooterIllustrationsV2'
-
+// ** React Imports
+'use client'
 import { useState } from 'react'
 
+// ** Next Imports
+import Link from 'next/link'
+
+// ** MUI Components
 import Alert from '@mui/material/Alert'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
@@ -22,21 +23,19 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Typography from '@mui/material/Typography'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
 
-
-
-import Link from 'next/link'
-import Icon from '@/app/@core/components/icon/index'
-
-
+// ** Icon Imports
+import Icon from '@/app/@core/components/icon'
 
 // ** Third Party Imports
 import * as yup from 'yup'
 import { useForm, Controller } from 'react-hook-form'
-// import { yupResolver } from '@hookform/resolvers/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 // ** Hooks
 import { useAuth } from '@/app/hooks/useAuth'
-import UseBgColor from '../@core/hooks/useBgColor'
+import useBgColor from '@/app/@core/hooks/useBgColor'
+import { useSettings } from '@/app/@core/hooks/useSettings'
+
 // ** Configs
 import themeConfig from '@/app/configs/themeConfig'
 
@@ -44,6 +43,7 @@ import themeConfig from '@/app/configs/themeConfig'
 import BlankLayout from '@/app/@core/layouts/BlankLayout'
 
 // ** Demo Imports
+import FooterIllustrationsV2 from '@/app/views/pages/auth/FooterIllustrationsV2'
 
 // ** Styled Components
 const LoginIllustrationWrapper = styled(Box)(({ theme }) => ({
@@ -105,15 +105,14 @@ const defaultValues = {
     email: 'admin@materialize.com'
 }
 
-
-const Loginpage = () => {
+const LoginPage = () => {
     const [rememberMe, setRememberMe] = useState(true)
     const [showPassword, setShowPassword] = useState(false)
 
     // ** Hooks
     const auth = useAuth()
     const theme = useTheme()
-    const bgColors = UseBgColor()
+    const bgColors = useBgColor()
     const { settings } = useSettings()
     const hidden = useMediaQuery(theme.breakpoints.down('md'))
 
@@ -128,34 +127,36 @@ const Loginpage = () => {
     } = useForm({
         defaultValues,
         mode: 'onBlur',
-        // resolver: yupResolver(schema)
+        resolver: yupResolver(schema)
     })
 
     const onSubmit = data => {
+
         const { email, password } = data
         auth.login({ email, password, rememberMe }, () => {
+
             setError('email', {
                 type: 'manual',
                 message: 'Email or Password is invalid'
             })
+
         })
     }
     const imageSource = skin === 'bordered' ? 'auth-v2-login-illustration-bordered' : 'auth-v2-login-illustration'
 
-
     return (
         <Box className='content-right'>
-            (
-            <Box sx={{ flex: 1, display: 'flex', position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
-                <LoginIllustrationWrapper>
-                    <LoginIllustration
-                        alt='login-illustration'
-                        src={`/images/pages/${imageSource}-${theme.palette.mode}.png`}
-                    />
-                </LoginIllustrationWrapper>
-                <FooterIllustrationsV2 />
-            </Box>
-            )
+            {!hidden ? (
+                <Box sx={{ flex: 1, display: 'flex', position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
+                    <LoginIllustrationWrapper>
+                        <LoginIllustration
+                            alt='login-illustration'
+                            src={`/images/pages/${imageSource}-${theme.palette.mode}.png`}
+                        />
+                    </LoginIllustrationWrapper>
+                    <FooterIllustrationsV2 />
+                </Box>
+            ) : null}
             <RightWrapper sx={skin === 'bordered' && !hidden ? { borderLeft: `1px solid ${theme.palette.divider}` } : {}}>
                 <Box
                     sx={{
@@ -340,45 +341,43 @@ const Loginpage = () => {
                             <Button fullWidth size='large' type='submit' variant='contained' sx={{ mb: 7 }}>
                                 Login
                             </Button>
-                            {/* <Link href="/home">
-                                <Button variant="contained" color="primary">
-                                   Login
-                                </Button>
-                                </Link> */}
-                                <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                                    <Typography sx={{ mr: 2, color: 'text.secondary' }}>New on our platform?</Typography>
-                                    <Typography href='/register' component={Link} sx={{ color: 'primary.main', textDecoration: 'none' }}>
-                                        Create an account
-                                    </Typography>
-                                </Box>
-                                <Divider
-                                    sx={{
-                                        '& .MuiDivider-wrapper': { px: 4 },
-                                        mt: theme => `${theme.spacing(5)} !important`,
-                                        mb: theme => `${theme.spacing(7.5)} !important`
-                                    }}
+                            <Link href='/home'>
+                                <Button>Login</Button>
+                            </Link>
+                            <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+                                <Typography sx={{ mr: 2, color: 'text.secondary' }}>New on our platform?</Typography>
+                                <Typography href='/register' component={Link} sx={{ color: 'primary.main', textDecoration: 'none' }}>
+                                    Create an account
+                                </Typography>
+                            </Box>
+                            <Divider
+                                sx={{
+                                    '& .MuiDivider-wrapper': { px: 4 },
+                                    mt: theme => `${theme.spacing(5)} !important`,
+                                    mb: theme => `${theme.spacing(7.5)} !important`
+                                }}
+                            >
+                                or
+                            </Divider>
+                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <IconButton href='/' component={Link} sx={{ color: '#497ce2' }} onClick={e => e.preventDefault()}>
+                                    <Icon icon='mdi:facebook' />
+                                </IconButton>
+                                <IconButton href='/' component={Link} sx={{ color: '#1da1f2' }} onClick={e => e.preventDefault()}>
+                                    <Icon icon='mdi:twitter' />
+                                </IconButton>
+                                <IconButton
+                                    href='/'
+                                    component={Link}
+                                    onClick={e => e.preventDefault()}
+                                    sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : 'grey.300') }}
                                 >
-                                    or
-                                </Divider>
-                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <IconButton href='/' component={Link} sx={{ color: '#497ce2' }} onClick={e => e.preventDefault()}>
-                                        <Icon icon='mdi:facebook' />
-                                    </IconButton>
-                                    <IconButton href='/' component={Link} sx={{ color: '#1da1f2' }} onClick={e => e.preventDefault()}>
-                                        <Icon icon='mdi:twitter' />
-                                    </IconButton>
-                                    <IconButton
-                                        href='/'
-                                        component={Link}
-                                        onClick={e => e.preventDefault()}
-                                        sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : 'grey.300') }}
-                                    >
-                                        <Icon icon='mdi:github' />
-                                    </IconButton>
-                                    <IconButton href='/' component={Link} sx={{ color: '#db4437' }} onClick={e => e.preventDefault()}>
-                                        <Icon icon='mdi:google' />
-                                    </IconButton>
-                                </Box>
+                                    <Icon icon='mdi:github' />
+                                </IconButton>
+                                <IconButton href='/' component={Link} sx={{ color: '#db4437' }} onClick={e => e.preventDefault()}>
+                                    <Icon icon='mdi:google' />
+                                </IconButton>
+                            </Box>
                         </form>
                     </BoxWrapper>
                 </Box>
@@ -386,8 +385,7 @@ const Loginpage = () => {
         </Box>
     )
 }
+LoginPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
+LoginPage.guestGuard = true
 
-Loginpage.getLayout = page => <BlankLayout>{page}</BlankLayout>
-Loginpage.guestGuard = true
-
-export default Loginpage
+export default LoginPage
